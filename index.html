@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Full AMV Booking</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: rgba(255,255,255,0.08);
+      --card-border: rgba(255,255,255,0.14);
+      --text: #f5f7ff;
+      --muted: #b8bfd6;
+      --accent: #7c5cff;
+      --accent-2: #18c6ff;
+      --success: #28e0a1;
+      --shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124,92,255,0.25), transparent 30%),
+        radial-gradient(circle at top right, rgba(24,198,255,0.22), transparent 25%),
+        linear-gradient(180deg, #090d1a 0%, #0b1020 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1150px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 84px 0 48px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(124,92,255,0.16);
+      border: 1px solid rgba(124,92,255,0.35);
+      color: #e6ddff;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(38px, 6vw, 70px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      max-width: 760px;
+      margin: 18px auto 0;
+      color: var(--muted);
+      font-size: clamp(17px, 2.4vw, 20px);
+    }
+
+    .cta-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 16px;
+      font-weight: 700;
+      transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .section {
+      padding: 28px 0 64px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px);
+      margin: 0 0 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      max-width: 760px;
+      margin-bottom: 30px;
+    }
+
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 26px;
+      padding: 26px;
+      backdrop-filter: blur(10px);
+      position: relative;
+      box-shadow: var(--shadow);
+    }
+
+    .card.popular {
+      border-color: rgba(24,198,255,0.55);
+      transform: scale(1.02);
+    }
+
+    .popular-tag {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      color: white;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .package-name {
+      font-size: 26px;
+      margin: 0 0 8px;
+    }
+
+    .price {
+      font-size: 42px;
+      font-weight: 900;
+      margin: 6px 0 8px;
+      letter-spacing: -0.04em;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0 24px;
+    }
+
+    li {
+      margin-bottom: 12px;
+      padding-left: 24px;
+      position: relative;
+      color: #eef1ff;
+    }
+
+    li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--success);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 14px;
+    }
+
+    .step {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 18px 18px 18px 54px;
+      position: relative;
+    }
+
+    .step-number {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .video-placeholder {
+      display: grid;
+      gap: 14px;
+    }
+
+    .video-box {
+      aspect-ratio: 16 / 9;
+      border-radius: 22px;
+      border: 1px solid var(--card-border);
+      background: linear-gradient(135deg, rgba(124,92,255,0.16), rgba(24,198,255,0.12));
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      text-align: center;
+      padding: 20px;
+    }
+
+    .faq {
+      display: grid;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    footer {
+      padding: 32px 0 60px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .packages, .grid-2, .stats {
+        grid-template-columns: 1fr;
+      }
+      .card.popular { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="badge">Full-Length AMVs for Artists</div>
+      <h1>Turn your song into a full anime music video.</h1>
+      <p class="subtitle">
+        Full-song AMVs with strong sync, clean flow and a style that matches your track. Built for artists who want visuals that actually hit.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://tally.so/" target="_blank" rel="noreferrer">Jetzt buchen</a>
+        <a class="btn btn-secondary" href="#packages">Pakete ansehen</a>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <strong>Full Song</strong>
+          <span>No half edits. Every package covers the complete track.</span>
+        </div>
+        <div class="stat">
+          <strong>Team Power</strong>
+          <span>Created with an AMV team for consistent quality and faster turnaround.</span>
+        </div>
+        <div class="stat">
+          <strong>Artist Focus</strong>
+          <span>Made for promotion, branding and memorable visuals around your music.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="packages">
+      <div class="container">
+        <h2 class="section-title">Choose your package</h2>
+        <p class="section-copy">
+          Three levels. Same mission: give your track a full-length AMV that feels like a real music video instead of just random clips in a blender.
+        </p>
+
+        <div class="packages">
+          <article class="card">
+            <h3 class="package-name">VIBE</h3>
+            <div class="price">70€</div>
+            <div class="small">Perfect for smaller artists and first-time bookings.</div>
+            <ul>
+              <li>1 full-length AMV for the complete song</li>
+              <li>Clean beat sync</li>
+              <li>Simple but fitting effects and transitions</li>
+              <li>Anime scenes matched to the overall vibe</li>
+              <li>1 small revision included</li>
+              <li>Standard turnaround</li>
+            </ul>
+            <a class="btn btn-secondary" href="https://tally.so/" target="_blank" rel="noreferrer">VIBE anfragen</a>
+          </article>
+
+          <article class="card popular">
+            <div class="popular-tag">Most booked</div>
+            <h3 class="package-name">IMPACT</h3>
+            <div class="price">100€</div>
+            <div class="small">Best balance between quality, detail and price.</div>
+            <ul>
+              <li>1 full-length AMV for the complete song</li>
+              <li>Stronger beat sync and better drop placement</li>
+              <li>More effects and smoother flow</li>
+              <li>Emotional scene selection that fits the track</li>
+              <li>Optional lyrics or subtitles</li>
+              <li>2–3 revisions included</li>
+              <li>Priority turnaround</li>
+            </ul>
+            <a class="btn btn-primary" href="https://tally.so/" target="_blank" rel="noreferrer">IMPACT buchen</a>
+          </article>
+
+          <article class="card">
+            <h3 class="package-name">LEGEND</h3>
+            <div class="price">150€</div>
+            <div class="small">For artists who want the highest level and strongest presentation.</div>
+            <ul>
+              <li>1 full-length AMV for the complete song</li>
+              <li>Top-tier editing from the best-fit team member</li>
+              <li>Cinematic structure and premium transitions</li>
+              <li>Story-driven or emotion-focused visual flow</li>
+              <li>Optional lyrics or subtitles</li>
+              <li>3–5 revisions included</li>
+              <li>Priority production</li>
+              <li>Optional short promo cut for social media</li>
+            </ul>
+            <a class="btn btn-secondary" href="https://tally.so/" target="_blank" rel="noreferrer">LEGEND anfragen</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2">
+        <div>
+          <h2 class="section-title">How it works</h2>
+          <p class="section-copy">Simple process. No chaos, no carrier pigeon, no smoke signals.</p>
+          <div class="steps">
+            <div class="step"><div class="step-number">1</div><strong>Request your package</strong><br/>Send your song link, contact info and preferred package through the booking form.</div>
+            <div class="step"><div class="step-number">2</div><strong>Song and concept check</strong><br/>We review the track and match the visual direction to the vibe and energy.</div>
+            <div class="step"><div class="step-number">3</div><strong>Production starts</strong><br/>Your AMV is created by the team based on your chosen package and style.</div>
+            <div class="step"><div class="step-number">4</div><strong>Delivery and revisions</strong><br/>You receive the full AMV and can use your included revisions if needed.</div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="section-title">Showcase</h2>
+          <p class="section-copy">Replace these placeholders with your best YouTube embeds later.</p>
+          <div class="video-placeholder">
+            <div class="video-box">Best AMV Example #1<br/>Paste a YouTube embed here</div>
+            <div class="video-box">Best AMV Example #2<br/>Paste a YouTube embed here</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">FAQ</h2>
+        <div class="faq">
+          <div class="faq-item"><strong>How long does one AMV go?</strong><br/>Every package covers the full length of the selected song.</div>
+          <div class="faq-item"><strong>Can I choose the anime style?</strong><br/>Yes. You can share your preferred vibe, anime direction or visual references in the form.</div>
+          <div class="faq-item"><strong>How do I book?</strong><br/>Click one of the booking buttons and fill in your details, track link and package choice.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Built for artists who want visuals with impact.
+    </div>
+  </footer>
+</body>
+</html>
