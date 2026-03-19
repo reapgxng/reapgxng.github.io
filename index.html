@@ -288,6 +288,19 @@
 </head>
 <body>
   <header class="hero">
+    <div class="container" style="margin-bottom: 24px;">
+      <div style="background: linear-gradient(135deg, rgba(124,92,255,0.28), rgba(24,198,255,0.18)); border: 1px solid rgba(255,255,255,0.12); border-radius: 28px; min-height: 220px; display: flex; align-items: flex-end; padding: 26px; box-shadow: var(--shadow); position: relative; overflow: hidden;">
+        <div style="position:absolute; inset:0; background: radial-gradient(circle at 15% 20%, rgba(255,255,255,0.08), transparent 20%), radial-gradient(circle at 85% 20%, rgba(255,255,255,0.06), transparent 18%), linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.22));"></div>
+        <div style="position:relative; display:flex; align-items:end; gap:18px; flex-wrap:wrap; z-index:1;">
+          <div style="width:92px; height:92px; border-radius:24px; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18); display:grid; place-items:center; font-size:34px; font-weight:900;">R</div>
+          <div>
+            <div style="font-size:13px; color:#d7def5; opacity:.9; margin-bottom:6px; text-transform:uppercase; letter-spacing:.12em;">AMV Studio</div>
+            <div style="font-size: clamp(28px, 4vw, 42px); font-weight:900; letter-spacing:-0.04em;">reapgxng</div>
+            <div style="color: var(--muted); margin-top:4px;">Full-song AMVs for artists • clean visuals • strong impact</div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="badge">Full-Length AMVs for Artists</div>
       <h1>Turn your song into a full anime music video.</h1>
@@ -393,10 +406,18 @@
           <h2 class="section-title">Showcase</h2>
           <p class="section-copy">Replace these placeholders with your best YouTube embeds later.</p>
           <div class="video-placeholder">
-            <div class="video-box">Best AMV Example #1<br/>Paste a YouTube embed here</div>
-            <div class="video-box">Best AMV Example #2<br/>Paste a YouTube embed here</div>
+            <div class="video-box" style="padding:0; overflow:hidden;">
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/iPPh0TH-lDQ" title="AMV Example 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="video-box" style="padding:0; overflow:hidden;">
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/xy1bKrI8KNs" title="AMV Example 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="video-box" style="padding:0; overflow:hidden;">
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/44ARtjk0sqM" title="AMV Example 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
 
@@ -412,10 +433,29 @@
     </section>
   </main>
 
+  <section class="section">
+      <div class="container">
+        <div class="card" style="display:grid; gap:14px; text-align:center;">
+          <h2 class="section-title" style="margin-bottom:0;">Ready to book your AMV?</h2>
+          <p class="section-copy" style="max-width:none; margin:0 auto;">Choose your package, send your song and I’ll contact you after your submission to confirm everything before production starts.</p>
+          <div class="cta-row" style="margin-top:4px;">
+            <a class="btn btn-primary" href="https://tally.so/r/7RZzvz" target="_blank" rel="noreferrer">Book now</a>
+            <a class="btn btn-secondary" href="#packages">See packages</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer>
     <div class="container">
-      Built for artists who want visuals with impact.
+      <div style="display:flex; justify-content:center; align-items:center; gap:14px; flex-wrap:wrap;">
+        <span>Built for artists who want visuals with impact.</span>
+        <span style="opacity:.5;">•</span>
+        <span>YouTube: https://www.youtube.com/@reapamv</span>
+      </div>
     </div>
   </footer>
 </body>
 </html>
+
